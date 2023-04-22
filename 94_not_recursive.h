@@ -2,8 +2,8 @@
 // Created by 17336 on 2023/4/3.
 //
 
-#ifndef HOT100_2_94_H
-#define HOT100_2_94_H
+#ifndef HOT100_2_94_NOT_RECURSIVE_H
+#define HOT100_2_94_NOT_RECURSIVE_H
 
 #include <vector>
 
@@ -25,14 +25,23 @@ struct TreeNode {
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        if(!root) return {};
-        vector<int> left= inorderTraversal(root->left),right= inorderTraversal(root->right);
-        left.push_back(root->val);
-        left.insert(left.end(),right.begin(),right.end());
-        return left;
+        vector<TreeNode *> stack;
+        TreeNode *p=root;
+        vector<int> res;
+        while (!stack.empty()||p) {
+            if(p) {
+                stack.push_back(p);
+                p=p->left;
+            }
+            else {
+                p=stack.back();
+                res.push_back(p->val);
+                stack.pop_back();
+                p=p->right;
+            }
+        }
+        return res;
     }
 };
-//leetcode submit region end(Prohibit modification and deletion)
 
-
-#endif //HOT100_2_94_H
+#endif //HOT100_2_94_NOT_RECURSIVE_H

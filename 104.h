@@ -1,13 +1,11 @@
 //
-// Created by 17336 on 2023/4/3.
+// Created by 17336 on 2023/4/4.
 //
 
-#ifndef HOT100_2_94_H
-#define HOT100_2_94_H
+#ifndef HOT100_2_104_H
+#define HOT100_2_104_H
 
-#include <vector>
-
-using namespace std;
+#include <algorithm>
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
@@ -24,15 +22,12 @@ struct TreeNode {
 
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode* root) {
-        if(!root) return {};
-        vector<int> left= inorderTraversal(root->left),right= inorderTraversal(root->right);
-        left.push_back(root->val);
-        left.insert(left.end(),right.begin(),right.end());
-        return left;
+    int maxDepth(TreeNode* root) {
+        if(!root) return 0;
+        return std::max(maxDepth(root->left), maxDepth(root->right))+1;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
 
-#endif //HOT100_2_94_H
+#endif //HOT100_2_104_H
